@@ -1,0 +1,45 @@
+body{
+    background: gray;
+    font-family: sans-serif;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    display: flex;
+}
+.music{
+    text-align: center;
+    background: darkgray;
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+}
+.cover{
+    width: 100%;
+    max-width: 250px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+.control button{
+    font-size: 20px;
+    color: white;
+    background: darkgray;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+}
+#progress,#volume{
+    width: 100%;
+    margin: 10px 0;
+}
+.time{
+    font-size: 12px;
+}
+#list{
+    padding: 5px;
+    cursor:pointer;
+}
+#list li.active{
+    background-color: gray;
+}

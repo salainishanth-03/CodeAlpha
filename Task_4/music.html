@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Music Player</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>           
+        <h1 style="text-align: top; color: white; font-family: sans-serif;"></h1>  
+        <div class="music">
+            <img id="cover" src="cover1.jpg" alt="art" class="cover">
+            <h2 id="title">Title</h2>
+            <h3 id="artist">Artist</h3>
+            <audio id="audio"></audio>
+            <div class="control">
+                <button id="prev">⏮️</button>
+                <button id="play">▶️</button>
+                <button id="next">⏭️</button>
+            </div>
+            <input type="range" id="progress" value="0">
+             <div class="time">
+                <span id="current">00:00</span>/<span id="duration">00:00</span>
+             </div>
+             <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+             <ul id="list"></ul>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>

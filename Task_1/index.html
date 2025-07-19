@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>Travel Gallery</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <img src="topic.png" alt="topic" height="300" width="1500">
+        <div class="filter">
+            <button class="button" onclick="show('all_over_the_world',this)">All Over the World</button>
+            <button class="button" onclick="show('india',this)">India</button>
+            <button class="button" onclick="show('australia',this)">Australia</button>
+            <button class="button" onclick="show('singapore',this)">Singapore</button>
+            <button class="button" onclick="show('malaysia',this)">Malaysia</button>
+            <button class="button" onclick="show('srilanka',this)">Srilanka</button>
+            <button class="button" onclick="show('japan',this)">Japan</button>
+        </div>
+        <div id="content" class="content"></div>
+        <div id="lightbox" class="lightbox">
+            <span class="close" onclick="closelightbox()">&times;</span>
+            <img id="lightbox-img" src="" alt="">
+            <div class="nav">
+            <span class="prev" onclick="navigate(-1)">&#10094;</span>
+            <span class="next" onclick="navigate(1)">&#10095;</span>
+        </div>
+    </div>
+        <script>
+            const data={all_over_the_world:[{img:"taj.jpg",label:"Taj Mahal"},{img:"kerala.jpg",label:"Kerala"}, { img: "tamil.jpg", label: "Tamil Nadu" }, { img: "goa.jpg", label: "Goa" }, { img: "rajastan.jpg", label: "Rajasthan" }, { img: "sydney.jpg", label: "Sydney Opera House" }, { img: "air.jpg", label: "Hot Air Balloon" }, { img: "kangaroo.jpg", label: "Kangaroo" }, { img: "kimberley.jpg", label: "Cruise the Kimberley" }, { img: "merlion.jpg", label: "Merlion Park" }, { img: "botanic.jpg", label: "Botanic Gardens" }, { img: "singzoo.jpg", label: "Singapore Zoo" }, { img: "clarke.jpg", label: "Clarke Quay" }, { img: "sentosa.jpg", label: "Sentosa Island" }, { img: "petronas.jpg", label: "Petronas Towers" }, { img: "batu.jpg", label: "Batu Caves" }, { img: "langkawi.jpg", label: "Langkawi" }, { img: "legoland.jpg", label: "Legoland Malaysia" }, { img: "klcc.jpg", label: "KLCC Park" }, { img: "colombo.jpg", label: "Colombo" }, { img: "kandy.jpg", label: "Kandy" }, { img: "sigiriya.jpg", label: "Sigiriya" }, { img: "eliya.jpg", label: "Nuwara Eliya" }, { img: "yala.jpg", label: "Yala National Park" }, { img: "tokyo.jpg", label: "Tokyo" }, { img: "kyoto.jpg", label: "Kyoto" }, { img: "osaka.jpg", label: "Osaka" }, { img: "sapporo.jpg", label: "Sapporo" }, { img: "kanazawa.jpg", label: "Kanazawa" }],
+                         india:[{img:"taj.jpg",label:"Taj Mahal"},{img:"kerala.jpg",label: "Kerala"},{img:"tamil.jpg",label:"Tamil Nadu"},{img:"goa.jpg",label:"Goa"},{img:"rajastan.jpg",label:"Rajasthan"}],
+                         australia:[{img:"sydney.jpg",label:"Sydney Opera House"},{img:"air.jpg",label:"Hot Air Balloon"},{img:"kangaroo.jpg",label:"Kangaroo"},{img:"kimberley.jpg",label:"Cruise the Kimberley"}],
+                         singapore:[{img:"merlion.jpg",label:"Merlion Park"},{img:"botanic.jpg",label:"Botanic Gardens"},{img:"singzoo.jpg",label:"Singapore Zoo"},{img:"clarke.jpg",label:"Clarke Quay"},{img:"sentosa.jpg",label:"Sentosa Island"}],
+                         malaysia:[{img:"petronas.jpg",label:"Petronas Towers"},{img:"batu.jpg",label:"Batu Caves"},{img:"langkawi.jpg",label:"Langkawi"},{img:"legoland.jpg",label:"Legoland Malaysia"},{img:"klcc.jpg",label:"KLCC Park"}],
+                         srilanka:[{img:"colombo.jpg",label:"Colombo"},{img:"kandy.jpg",label:"Kandy"},{img:"sigiriya.jpg",label:"Sigiriya"},{img:"eliya.jpg",label:"Nuwara Eliya"},{img:"yala.jpg",label:"Yala National Park"}],
+                         japan:[{img:"tokyo.jpg",label:"Tokyo"},{img:"kyoto.jpg",label:"Kyoto"},{img:"osaka.jpg",label:"Osaka"},{img:"sapporo.jpg",label:"Sapporo"},{img:"kanazawa.jpg",label:"Kanazawa"},]};
+                let currentimage=[];
+                let currentindex=0;
+            function show(category,button) {
+                const container=document.getElementById("content");
+                const buttons=document.querySelectorAll(".button");
+                buttons.forEach(btn=>btn.classList.remove("active"));
+                button.classList.add("active");
+                currentimage=data[category];
+                let html=`<h3>${category.charAt(0).toUpperCase()+category.slice(1)}Travel</h3>
+                <div class="grid">`;
+                currentimage.forEach((place,index)=>{
+                    html+=`
+                          <div class="card" onclick="openlightbox(${index})">
+                            <img src="${place.img}" alt="${place.label}">
+                            <p>${place.label}</p>
+                          </div>`;
+                });
+                html+=`</div>`;
+                container.innerHTML=html;
+            }
+
+            function openlightbox(index){
+                currentindex=index;
+                const lightbox=document.getElementById("lightbox");
+                const lightboximg=document.getElementById("lightbox-img");
+                lightboximg.src=currentimage[index].img;
+                lightbox.style.display="flex";
+            }
+            function closelightbox(){
+                document.getElementById("lightbox").style.display="none";
+            }
+            function navigate(step){
+                currentindex=(currentindex+step+currentimage.length)%currentimage.length;
+                document.getElementById("lightbox-img").src=currentimage[currentindex].img;
+            }
+            window.onload=()=>{
+                document.querySelector(".button").click();
+            };
+            
+        </script>
+    </body>
+</html>
